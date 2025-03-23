@@ -1,25 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import affirmations from "./affirmations";
 
-function App() {
+import { useState, useEffect } from "react";
+
+const App = () => {
+  const [affirmation, setAffirmation] = useState(affirmations[0]);
+  
+  useEffect(() => {
+    const todayIndex = new Date().getDate() % affirmations.length;
+    setAffirmation(affirmations[todayIndex]);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="txtAlignCenter">
+        <h2>{affirmation.title}</h2>
+        <p>{affirmation.description}</p>        
+      </div>      
+    </>
   );
-}
+};
 
 export default App;
